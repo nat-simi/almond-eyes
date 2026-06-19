@@ -1,84 +1,77 @@
-// =========================
-// SET YOUR BIRTHDAY DATE HERE
-// Format: YYYY-MM-DD
-// =========================
-const birthdayDate = new Date("2026-07-01T00:00:00").getTime();
+const birthdayDate = new Date("2026-06-27T00:00:00").getTime();
 
-// =========================
-// COUNTDOWN ELEMENTS
-// =========================
 const countdownEl = document.getElementById("countdown");
-const heroSection = document.querySelector(".hero");
-const lockedOverlay = document.getElementById("locked");
+const lockScreen = document.getElementById("lockScreen");
+const mainContent = document.getElementById("mainContent");
 
-// =========================
-// UPDATE COUNTDOWN EVERY SECOND
-// =========================
 const timer = setInterval(() => {
   const now = new Date().getTime();
   const distance = birthdayDate - now;
 
-  // Time calculations
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-  // Display result
   if (countdownEl) {
-    countdownEl.innerHTML =
-      days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    countdownEl.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
   }
 
-  // If countdown is finished
   if (distance < 0) {
     clearInterval(timer);
-
-    if (countdownEl) {
-      countdownEl.innerHTML = "🎉 HAPPY BIRTHDAY 🎉";
-    }
-
-    // Unlock website
-    if (lockedOverlay) {
-      lockedOverlay.style.display = "none";
-    }
-
-    document.body.classList.add("unlocked");
+    unlock();
   }
 }, 1000);
 
-// =========================
-// FADE-IN ANIMATION ON SCROLL
-// =========================
-const fadeElements = document.querySelectorAll(".fade-in");
-
-const revealOnScroll = () => {
-  fadeElements.forEach((el) => {
-    const windowHeight = window.innerHeight;
-    const elementTop = el.getBoundingClientRect().top;
-
-    if (elementTop < windowHeight - 100) {
-      el.style.opacity = 1;
-      el.style.transform = "translateY(0)";
-    }
-  });
-};
-
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
-
-// =========================
-// OPTIONAL: SIMPLE CLICK EFFECT
-// =========================
-document.addEventListener("click", (e) => {
-  const sparkle = document.createElement("div");
-  sparkle.className = "sparkle";
-  sparkle.style.left = e.pageX + "px";
-  sparkle.style.top = e.pageY + "px";
-
-  document.body.appendChild(sparkle);
+function unlock() {
+  lockScreen.style.opacity = "0";
+  lockScreen.style.transform = "scale(1.1)";
+  lockScreen.style.transition = "1.5s ease";
 
   setTimeout(() => {
-    sparkle.remove();
-  }, 800);
-});
+    lockScreen.style.display = "none";
+    mainContent.classList.remove("hidden");
+    animateReveal();
+    confetti();
+  }, 1500);
+}
+
+function animateReveal() {
+  const items = document.querySelectorAll(".fade-in");
+
+  const reveal = () => {
+    items.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < window.innerHeight - 100) {
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+      }
+    });
+  };
+
+  window.addEventListener("scroll", reveal);
+  reveal();
+}
+
+/* simple cinematic confetti */
+function confetti() {
+  for (let i = 0; i < 60; i++) {
+    const c = document.createElement("div");
+    c.style.position = "fixed";
+    c.style.width = "6px";
+    c.style.height = "6px";
+    c.style.background = ["#ff4fd8","#9b59b6","#fff","#7f5af0"][Math.floor(Math.random()*4)];
+    c.style.left = Math.random()*100+"vw";
+    c.style.top = "-10px";
+    c.style.zIndex = 9999;
+    document.body.appendChild(c);
+
+    let fall = setInterval(() => {
+      c.style.top = c.offsetTop + 4 + "px";
+      if (c.offsetTop > window.innerHeight) {
+        c.remove();
+        clearInterval(fall);
+      }
+    }, 20);
+  }
+}
