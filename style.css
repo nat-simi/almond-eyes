@@ -1,0 +1,313 @@
+/* =========================
+   Almond Eyes - Style CSS
+   Part 1: Base + Hero UI
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+}
+
+/* Background */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        135deg,
+        #0b0618,
+        #1a0b2e,
+        #2a0f3d
+    );
+
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+    z-index: -2;
+}
+
+/* Smooth gradient animation */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Glass Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-radius: 25px;
+    padding: 40px 30px;
+    width: 90%;
+    max-width: 500px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Small text */
+.small-text {
+    font-size: 12px;
+    opacity: 0.7;
+    letter-spacing: 2px;
+}
+
+/* Title */
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    margin: 15px 0;
+    color: #ffffff;
+}
+
+/* Subtitle */
+.subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Divider */
+.divider {
+    width: 60px;
+    height: 2px;
+    background: rgba(255,255,255,0.3);
+    margin: 20px auto;
+    border-radius: 5px;
+}
+
+/* Countdown */
+.countdown {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 10px;
+}
+
+.time-box {
+    flex: 1;
+    padding: 10px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+}
+
+.time-box span {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.time-box small {
+    display: block;
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+/* Button */
+button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    opacity: 0.5;
+}/* =========================
+   OUR STORY SECTION
+========================= */
+.story-section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.story-title {
+  font-size: 2.2rem;
+  color: #d6b3ff;
+  margin-bottom: 20px;
+}
+
+.story-content {
+  max-width: 800px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  line-height: 1.7;
+}
+
+/* =========================
+   GALLERY SECTION
+========================= */
+.gallery {
+  padding: 80px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.4s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* =========================
+   LETTERS SECTION (TYPEWRITER STYLE)
+========================= */
+.letters {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.typewriter {
+  display: inline-block;
+  border-right: 2px solid #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 5s steps(40, end), blink 0.8s infinite;
+  font-size: 1.1rem;
+  max-width: 90%;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+/* =========================
+   100 REASONS CARDS
+========================= */
+.reasons {
+  padding: 80px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.reason-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.reason-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* =========================
+   MEMORY CAPSULE
+========================= */
+.memory-capsule {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.capsule-box {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+/* =========================
+   FINAL MESSAGE SECTION
+========================= */
+.final-message {
+  padding: 100px 20px;
+  text-align: center;
+  background: radial-gradient(circle, rgba(155,89,182,0.3), transparent);
+}
+
+.final-message h1 {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+/* =========================
+   ANIMATIONS & EFFECTS
+========================= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+@media (max-width: 768px) {
+  .story-title {
+    font-size: 1.6rem;
+  }
+
+  .final-message h1 {
+    font-size: 1.8rem;
+  }
+
+  .gallery img {
+    height: 140px;
+  }
+}
