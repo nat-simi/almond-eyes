@@ -1,48 +1,73 @@
+// =========================
+// BIRTHDAY DATE
+// =========================
 const birthdayDate = new Date("2026-06-27T00:00:00").getTime();
 
+// =========================
+// ELEMENTS
+// =========================
 const countdownEl = document.getElementById("countdown");
 const lockScreen = document.getElementById("lockScreen");
 const mainContent = document.getElementById("mainContent");
 
+// =========================
+// COUNTDOWN TIMER
+// =========================
 const timer = setInterval(() => {
   const now = new Date().getTime();
   const distance = birthdayDate - now;
 
-  const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const s = Math.floor((distance % (1000 * 60)) / 1000);
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   if (countdownEl) {
-    countdownEl.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+    countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
   }
 
+  // =========================
+  // UNLOCK EVENT
+  // =========================
   if (distance < 0) {
     clearInterval(timer);
-    unlock();
+    unlockExperience();
   }
+
 }, 1000);
 
-function unlock() {
+// =========================
+// UNLOCK EXPERIENCE
+// =========================
+function unlockExperience() {
+
+  // fade out lock screen
+  lockScreen.style.transition = "1.5s ease";
   lockScreen.style.opacity = "0";
   lockScreen.style.transform = "scale(1.1)";
-  lockScreen.style.transition = "1.5s ease";
 
   setTimeout(() => {
     lockScreen.style.display = "none";
     mainContent.classList.remove("hidden");
-    animateReveal();
-    confetti();
+
+    revealOnScroll();
+    startConfetti();
+
   }, 1500);
 }
 
-function animateReveal() {
-  const items = document.querySelectorAll(".fade-in");
+// =========================
+// SCROLL REVEAL (100 CARDS ANIMATION)
+// =========================
+function revealOnScroll() {
+  const elements = document.querySelectorAll(".fade-in");
 
   const reveal = () => {
-    items.forEach(el => {
-      const top = el.getBoundingClientRect().top;
-      if (top < window.innerHeight - 100) {
+    elements.forEach(el => {
+      const windowHeight = window.innerHeight;
+      const elementTop = el.getBoundingClientRect().top;
+
+      if (elementTop < windowHeight - 80) {
         el.style.opacity = "1";
         el.style.transform = "translateY(0)";
       }
@@ -53,25 +78,54 @@ function animateReveal() {
   reveal();
 }
 
-/* simple cinematic confetti */
-function confetti() {
-  for (let i = 0; i < 60; i++) {
-    const c = document.createElement("div");
-    c.style.position = "fixed";
-    c.style.width = "6px";
-    c.style.height = "6px";
-    c.style.background = ["#ff4fd8","#9b59b6","#fff","#7f5af0"][Math.floor(Math.random()*4)];
-    c.style.left = Math.random()*100+"vw";
-    c.style.top = "-10px";
-    c.style.zIndex = 9999;
-    document.body.appendChild(c);
+// =========================
+// CONFETTI EFFECT (CINEMATIC)
+// =========================
+function startConfetti() {
+  const duration = 3500;
+  const end = Date.now() + duration;
 
-    let fall = setInterval(() => {
-      c.style.top = c.offsetTop + 4 + "px";
-      if (c.offsetTop > window.innerHeight) {
-        c.remove();
-        clearInterval(fall);
-      }
-    }, 20);
-  }
+  const colors = ["#ff4fd8", "#9b59b6", "#ffffff", "#7f5af0", "#ffcc70"];
+
+  const interval = setInterval(() => {
+    if (Date.now() > end) {
+      return clearInterval(interval);
+    }
+
+    createConfetti(colors);
+  }, 80);
 }
+
+function createConfetti(colors) {
+  const confetti = document.createElement("div");
+
+  confetti.style.position = "fixed";
+  confetti.style.width = "6px";
+  confetti.style.height = "6px";
+  confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+  confetti.style.left = Math.random() * window.innerWidth + "px";
+  confetti.style.top = "-10px";
+  confetti.style.zIndex = "9999";
+  confetti.style.borderRadius = "50%";
+  confetti.style.opacity = "0.9";
+
+  document.body.appendChild(confetti);
+
+  const fall = setInterval(() => {
+    confetti.style.top = confetti.offsetTop + 4 + "px";
+
+    if (confetti.offsetTop > window.innerHeight) {
+      confetti.remove();
+      clearInterval(fall);
+    }
+  }, 16);
+}
+
+// =========================
+// SAFETY: INIT STATE
+// =========================
+window.addEventListener("load", () => {
+  if (mainContent) {
+    mainContent.classList.add("hidden");
+  }
+});
