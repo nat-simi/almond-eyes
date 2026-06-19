@@ -5,98 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Birthday Surprise ❤️</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- =========================
-       HERO + COUNTDOWN SECTION
-  ========================== -->
-  <section class="hero">
-    <div class="glass">
-      <h1>Happy Birthday ❤️</h1>
-      <p>Counting down to your special day...</p>
+  <!-- CINEMATIC BACKGROUND LAYERS -->
+  <div class="bg-glow"></div>
+
+  <!-- LOCK SCREEN -->
+  <section class="lock-screen" id="lockScreen">
+    <div class="glass-card lock-card">
+
+      <h1>🔒 Locked Surprise</h1>
+      <p>This experience unlocks when the countdown reaches zero</p>
 
       <div id="countdown"></div>
+
+      <p class="small-text">Waiting for the moment...</p>
+
     </div>
   </section>
 
-  <!-- =========================
-       OUR STORY
-  ========================== -->
-  <section class="story-section fade-in">
-    <h2 class="story-title">Our Story 💜</h2>
-    <div class="story-content">
-      <p>
-        Every moment with you feels like a beautiful memory in the making.
-        From the first smile to every late-night conversation, you’ve become
-        someone truly special in my life — my "almond eyes" forever story.
-      </p>
-    </div>
-  </section>
+  <!-- MAIN CONTENT -->
+  <div id="mainContent" class="hidden">
 
-  <!-- =========================
-       GALLERY
-  ========================== -->
-  <section class="gallery fade-in">
-    <img src="images/photo1.jpg" alt="memory1">
-    <img src="images/photo2.jpg" alt="memory2">
-    <img src="images/photo3.jpg" alt="memory3">
-    <img src="images/photo4.jpg" alt="memory4">
-  </section>
+    <section class="story-section fade-in">
+      <div class="glass-card">
+        <h2 class="story-title">Our Story 💜</h2>
+        <div class="story-content">
+          <p>
+            Every moment with you feels like a beautiful memory in the making.
+            You are my "almond eyes" forever story.
+          </p>
+        </div>
+      </div>
+    </section>
 
-  <!-- =========================
-       LETTERS SECTION
-  ========================== -->
-  <section class="letters fade-in">
-    <h2>Letters 💌</h2>
+    <section class="gallery fade-in">
+      <img src="images/photo1.jpg">
+      <img src="images/photo2.jpg">
+      <img src="images/photo3.jpg">
+      <img src="images/photo4.jpg">
+    </section>
 
-    <p class="typewriter">
-      I may not always say it perfectly, but I hope you always feel it...
-      you mean more to me than words can explain.
-    </p>
-  </section>
+    <section class="letters fade-in">
+      <div class="glass-card">
+        <h2>Letters 💌</h2>
+        <p class="typewriter">
+          I hope you always feel how deeply you are valued...
+        </p>
+      </div>
+    </section>
 
-  <!-- =========================
-       100 REASONS
-  ========================== -->
-  <section class="reasons fade-in">
-    <div class="reason-card">Your smile 😊</div>
-    <div class="reason-card">Your heart ❤️</div>
-    <div class="reason-card">Your kindness 💫</div>
-    <div class="reason-card">Your energy ✨</div>
-    <div class="reason-card">Your presence 🌸</div>
-    <div class="reason-card">You being YOU 💜</div>
-  </section>
+    <section class="reasons fade-in">
+      <div class="glass-card reason-card">Your smile</div>
+      <div class="glass-card reason-card">Your heart</div>
+      <div class="glass-card reason-card">Your energy</div>
+      <div class="glass-card reason-card">You being YOU</div>
+    </section>
 
-  <!-- =========================
-       MEMORY CAPSULE
-  ========================== -->
-  <section class="memory-capsule fade-in">
-    <h2>Memory Capsule 📦</h2>
+    <section class="memory-capsule fade-in">
+      <div class="glass-card">
+        <h2>Memory Capsule 📦</h2>
+        <p>Every moment with you lives here forever.</p>
+      </div>
+    </section>
 
-    <div class="capsule-box">
-      <p>
-        If I could store every moment with you, I would keep it here forever.
-        This is our little time capsule of memories.
-      </p>
-    </div>
-  </section>
+    <section class="final-message fade-in">
+      <h1>Happy Birthday 🎉</h1>
+      <p>You are my special one ❤️</p>
+    </section>
 
-  <!-- =========================
-       FINAL MESSAGE
-  ========================== -->
-  <section class="final-message fade-in">
-    <h1>Happy Birthday My Special One 🎉</h1>
-    <p>You deserve all the happiness in the world ❤️</p>
-  </section>
+  </div>
 
-  <!-- =========================
-       SCRIPT
-  ========================== -->
   <script src="script.js"></script>
-
 </body>
 </html>
